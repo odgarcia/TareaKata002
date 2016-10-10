@@ -7,6 +7,7 @@ class FuntionalTest(TestCase):
     def setUp(self):
         self.browser = webdriver.Firefox()
 
+
     def tearDown(self):
         self.browser.quit()
 
@@ -19,6 +20,7 @@ class FuntionalTest(TestCase):
         link = self.browser.find_element_by_id('id_register')
         link.click()
 
+        self.browser.implicitly_wait(100)
         nombre = self.browser.find_element_by_id('id_nombre')
         nombre.send_keys('Pedro')
 
@@ -41,7 +43,7 @@ class FuntionalTest(TestCase):
         nombreUsuario = self.browser.find_element_by_id('id_username')
         nombreUsuario.send_keys('pedro456')
 
-        clave = self.browser.find_element_by_id('id_clave')
+        clave = self.browser.find_element_by_id('id_password')
         clave.send_keys('clave123')
 
         botonGrabar = self.browser.find_element_by_id('id_grabar')
