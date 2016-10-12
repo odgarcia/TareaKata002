@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^logout$', views.logout),
     url(r'^trabajador/(?P<pk>\d+)$', views.detail),
     url(r'^detail', views.detalle_trabajador),
-    url(r'^addComment', views.add_comment),
+    #url(r'^addComment', views.add_comment),
     url(r'^mostrarComentarios/(?P<idTrabajador>\d+)$', views.mostrarComentarios),
     url(r'^mostrarTrabajadores/(?P<tipo>\w+)$', views.mostrarTrabajadores),
     url(r'^mostrarTrabajadores', views.mostrarTrabajadores),
