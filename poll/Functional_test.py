@@ -88,7 +88,6 @@ class FuntionalTest(TestCase):
 
     def test_editar(self):
         self.browser.get('http://localhost:8000')
-        self.browser.get('http://localhost:8000')
         link = self.browser.find_element_by_id('id_login')
         link.click()
 
@@ -112,33 +111,37 @@ class FuntionalTest(TestCase):
         self.browser.implicitly_wait(3)
 
         nombre = self.browser.find_element_by_id('id_nombre')
+        nombre.clear()
         nombre.send_keys('Carlos')
 
         apellidos = self.browser.find_element_by_id('id_apellidos')
+        apellidos.clear()
         apellidos.send_keys('Santana')
 
         experiencia = self.browser.find_element_by_id('id_aniosExperiencia')
-        experiencia.send_keys('3')
+        experiencia.clear()
+        experiencia.send_keys('5')
 
-        self.browser.find_element_by_xpath("//select[@id='id_tiposDeServicio']/option[text()='Desarrollador Web']").click()
         telefono = self.browser.find_element_by_id('id_telefono')
+        telefono.clear()
         telefono.send_keys('3013648285')
 
-        correo = self.browser.find_element_by_id('id_correo')
-        correo.send_keys('od.garcia@uniandes.edu.co')
-
-        imagen = self.browser.find_element_by_id('id_imagen')
-        imagen.send_keys('C:\Users\oscar\Downloads\yo.jpg')
 
         botonGrabar = self.browser.find_element_by_id('id_grabar')
         botonGrabar.click()
 
+        link = self.browser.find_element_by_id('id_editar')
+        link.click()
 
-        self.browser.implicitly_wait(3)
-        span=self.browser.find_element_by_xpath( '//span[text()="Carlos Santana"]')
-
-        self.assertIn('Carlos Santana', span.text)
-        self.assertNotIn('Pedro Perez', span.text)
+        #Verificando nombre
+        nombre = self.browser.find_element_by_id('id_nombre')
+        self.assertEqual(nombre.get_attribute("value"),'Carlos')
+        apellidos = self.browser.find_element_by_id('id_apellidos')
+        self.assertEqual(apellidos.get_attribute("value"), 'Santana')
+        telefono = self.browser.find_element_by_id('id_telefono')
+        self.assertEqual(telefono.get_attribute("value"), '3013648285')
+        experiencia = self.browser.find_element_by_id('id_aniosExperiencia')
+        self.assertEqual(experiencia.get_attribute("value"), '5')
 
 
 

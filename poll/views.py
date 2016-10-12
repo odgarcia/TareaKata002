@@ -85,7 +85,7 @@ def editar_perfil(request,idTrabajador):
         # formulario inicial
         form_trabajador = TrabajadorForm(instance=trabajador)
 
-    context = {'form_trabajador': form_trabajador}
+    context = {'form_trabajador': form_trabajador, 'idTrabajador' : idTrabajador}
     return render(request, 'poll/editar.html', context)
 
 @csrf_exempt
