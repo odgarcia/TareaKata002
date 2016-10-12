@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 class FuntionalTest(TestCase):
 
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Chrome('C:\Users\oscar\Downloads\chromedriver_win32\chromedriver.exe')
 
 
     def tearDown(self):
@@ -63,7 +63,7 @@ class FuntionalTest(TestCase):
     #     h2 = self.browser.find_element_by_xpath('//h2[text()="Pedro Perez"]')
     #     self.assertIn('Pedro Perez', h2.text)
     #
-    #
+
     # def test_ingreso(self):
     #     self.browser.get('http://localhost:8000')
     #     link = self.browser.find_element_by_id('id_login')
@@ -84,7 +84,7 @@ class FuntionalTest(TestCase):
     #     mensajeFlotante = self.browser.find_element_by_class_name('float-message')
     #     textMensaje = mensajeFlotante.text
     #     self.assertTrue(textMensaje.index('SUCCESS: Bienvenido al sistema pedro456'))
-    #
+
     #
     # def test_editar(self):
     #     self.browser.get('http://localhost:8000')
@@ -153,14 +153,22 @@ class FuntionalTest(TestCase):
         comentario = self.browser.find_element_by_id('comentario')
         comentario.clear()
         comentario.send_keys('Hola esto es una prueba')
-        button = self.browser.find_element_by_xpath('//button[@type="submit"]')
+
+        self.browser.implicitly_wait(20)
+        #button = self.browser.find_element_by_class_name('btn-success')
+        button = self.browser.find_element_by_xpath("//button[contains(@class, 'btn btn-default btn-success btn-guardar-comentario')]" )
         button.click()
 
-        self.browser.implicitly_wait(1)
-        h4 = self.browser.find_element_by_xpath('//h4[text()="od.garcia@uniandes.edu.co"]')
-        self.assertIn('od.garcia@uniandes.edu.co', h4.text)
-        p = self.browser.find_element_by_xpath('//p[text()="Hola esto es una prueba"]')
-        self.assertIn('Hola esto es una prueba', p.text)
+        self.browser.implicitly_wait(20)
+
+        for option in self.browser.find_element_by_id('comentarios').find_elements_by_tag_name('h4'):
+            if option.text.index('od.garcia@uniandes.edu.co'):
+                self.assertTrue(option.text.index('od.garcia@uniandes.edu.co'))
+
+        for optionp in self.browser.find_element_by_id('comentarios').find_elements_by_tag_name('p'):
+            if optionp.text.index('Hola esto es una prueba'):
+                self.assertTrue(optionp.text.index('Hola esto es una prueba'))
+
 
 
 
